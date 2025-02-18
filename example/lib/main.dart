@@ -30,8 +30,11 @@ class ReorderableTabBarPage extends StatefulWidget {
 extension StringExt on String {
   Text get text => Text(this);
   Widget tab(int index) {
-    return Tab(
-      text: "Tab $this",
+    return SizedBox(
+      width: 200,
+      child: Tab(
+        text: "Tab $this",
+      ),
     );
   }
 }
@@ -44,6 +47,12 @@ class _ReorderableTabBarPageState extends State<ReorderableTabBarPage> {
     "2",
     "3",
     "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
   ];
 
   bool isScrollable = false;
@@ -86,12 +95,31 @@ class _ReorderableTabBarPageState extends State<ReorderableTabBarPage> {
             ),
           ],
           bottom: ReorderableTabBar(
-            buildDefaultDragHandles: false,
+            buildDefaultDragHandles: true,
             tabs: tabs.map((e) => e.tab(tabs.indexOf(e))).toList(),
-            indicatorSize: tabSizeIsLabel ? TabBarIndicatorSize.label : null,
-            isScrollable: isScrollable,
+            indicatorSize: TabBarIndicatorSize.label,
+            labelPadding: EdgeInsets.zero,
+            isScrollable: true,
             reorderingTabBackgroundColor: Colors.black45,
             indicatorWeight: 5,
+            tabHeaders: const [
+              Text("Tab 1"),
+              Text("Tab 2"),
+              Text("Tab 3"),
+              Text("Tab 4"),
+              Text("Tab 5"),
+              Text("Tab 6"),
+              Text("Tab 7"),
+              Text("Tab 8"),
+              Text("Tab 9"),
+              Text("Tab 10"),
+            ]
+                .map((e) => SizedBox(
+                    width: 200,
+                    child: Center(
+                      child: e,
+                    )))
+                .toList(),
             tabBorderRadius: const BorderRadius.vertical(
               top: Radius.circular(8),
             ),

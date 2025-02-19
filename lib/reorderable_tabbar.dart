@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-const double _kTabHeight = 46.0;
+const double _kTabHeight = 32.0;
 const double _kTextAndIconTabHeight = 72.0;
 
 class _TabStyle extends AnimatedWidget {

@@ -654,7 +654,7 @@ class _ReorderableTabBarState extends State<ReorderableTabBar> {
   void didUpdateWidget(ReorderableTabBar oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.controller != oldWidget.controller) {
+    if (widget.controller != oldWidget.controller || widget.tabs.length != oldWidget.tabs.length) {
       _updateTabController();
       _initIndicatorPainter();
     } else if (widget.indicatorColor != oldWidget.indicatorColor ||

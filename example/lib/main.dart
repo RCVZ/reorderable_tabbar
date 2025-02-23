@@ -46,17 +46,31 @@ class _ReorderableTabBarPageState extends State<ReorderableTabBarPage> {
     "1",
     "2",
     "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
   ];
 
   bool isScrollable = false;
   bool tabSizeIsLabel = false;
+
+  Widget createTabHeader(int tab) {
+    return SizedBox(
+      width: 200,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "${tab + 1}",
+          ),
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  tabs.removeAt(tab);
+                });
+              },
+              icon: const Icon(Icons.close))
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,26 +114,14 @@ class _ReorderableTabBarPageState extends State<ReorderableTabBarPage> {
             indicatorSize: TabBarIndicatorSize.label,
             labelPadding: EdgeInsets.zero,
             isScrollable: true,
+            defaultIndicator: true,
             reorderingTabBackgroundColor: Colors.black45,
             indicatorWeight: 5,
-            tabHeaders: const [
-              Text("Tab 1"),
-              Text("Tab 2"),
-              Text("Tab 3"),
-              Text("Tab 4"),
-              Text("Tab 5"),
-              Text("Tab 6"),
-              Text("Tab 7"),
-              Text("Tab 8"),
-              Text("Tab 9"),
-              Text("Tab 10"),
-            ]
-                .map((e) => SizedBox(
-                    width: 200,
-                    child: Center(
-                      child: e,
-                    )))
-                .toList(),
+            indicator: UnderlineTabIndicator(
+              borderRadius: BorderRadius.zero,
+              borderSide: BorderSide(width: 4, color: Theme.of(context).colorScheme.onSurface),
+            ),
+            tabHeaders: List.generate(tabs.length, (index) => createTabHeader(index)),
             tabBorderRadius: const BorderRadius.vertical(
               top: Radius.circular(8),
             ),
